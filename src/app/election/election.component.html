@@ -1,0 +1,245 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <!---------------------------------------Input-------------------------->
+        <div class="col-sm-3 mt-5">
+            <div class="card-body left-form-container">
+                <mat-card [class.mat-elevation-z8]>
+                    <form [formGroup]="electionForm" (ngSubmit)="onSubmit()">
+                        <h3 style="font-family:sans-serif;color: black;"><strong>Create Election</strong></h3>
+                        <!-- sub-zone/division -->
+                        <ng-container>
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Election Name</mat-label>
+                                <input matInput placeholder="Election Name" formControlName="electionname"
+                                    (keypress)="space($event);letterOnly($event)" style="text-transform: capitalize;" />
+                                <mat-error *ngIf="f['electionname'].hasError('required')"> Please Enter Election
+                                    Name</mat-error>
+                            </mat-form-field>
+                        </ng-container>
+                        <!-- country (India static) -->
+                        <ng-container>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Election Type</mat-label>
+                                <mat-select formControlName="electiontype">
+                                    <mat-option>Election Type</mat-option>
+                                    <mat-option *ngFor="let election of electionType" [value]="election.Id">
+                                        {{ election.ElectionType }}</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="f['electiontype'].hasError('required')"> Please select Election
+                                    Type</mat-error>
+                            </mat-form-field>
+                        </ng-container>
+                        <ng-container>
+                            <mat-label style="font-family:sans-serif;color: black;"><strong>Booth List
+                                    Type</strong></mat-label><br>
+                            <mat-radio-group aria-label="Select an option"
+                                formControlName="IsAsemblyBoothListApplicable">
+                                <mat-radio-button *ngFor="let bothlist of isBothListArray" [value]="bothlist.id"
+                                    class="form-data" value="0"
+                                    style="margin-top: 1rem;">{{bothlist.name}}</mat-radio-button>
+                            </mat-radio-group>
+                            <ng-container *ngIf="electionForm.value.IsAsemblyBoothListApplicable">
+                                <mat-error
+                                    *ngIf="electionForm.controls['IsAsemblyBoothListApplicable'].hasError('required')">
+                                    Please Select Field.
+                                </mat-error>
+                            </ng-container>
+                        </ng-container><br><br>
+                        <ng-container>
+                            <mat-label style="font-family:sans-serif;color: black;"><strong>Is Sub-Election
+                                    Applicable?</strong></mat-label><br>
+                            <mat-radio-group aria-label="Select an option" formControlName="IsSubElectionApplicable">
+                                <mat-radio-button *ngFor="let isSub of isSubElectionArray" [value]="isSub.id"
+                                    class="form-data" value="1"
+                                    style="margin-top: 1rem; padding-left:0rem;padding-right:1rem;">{{isSub.name}}</mat-radio-button>
+                            </mat-radio-group>
+                            <ng-container *ngIf="electionForm.value.IsSubElectionApplicable">
+                                <mat-error
+                                    *ngIf="electionForm.controls['IsSubElectionApplicable'].hasError('required')">
+                                    Please Select Field.
+                                </mat-error>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="electionForm.value.IsSubElectionApplicable == 0 ? true :false">
+                            <form [formGroup]="addForm">
+                                <div class="card card-body left-form-container" style="margin-top: 1rem;">
+                                    <ng-container>
+                                        <div class="card-body left-form-container"
+                                            style="margin-top: -1rem;margin-left: -1rem;margin-right: 2rem">
+                                            <mat-form-field appearance="outline" style="margin-bottom: -2rem;">
+                                                <mat-label>Select Sub Election</mat-label>
+                                                <mat-select formControlName="subselection"
+                                                    [(ngModel)]="add.ElectionName">
+                                                    <mat-option>Select Sub Election</mat-option>
+                                                    <mat-option *ngFor="let subelection of subselection"
+                                                        [value]="subelection.ElectionName">
+                                                        {{ subelection.ElectionName }}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <button type="submit" class="btn btn-outline-primary btn-sm h-100"
+                                                (click)="Add()" style="margin-right: -3.1rem">Add</button>
+                                        </div>
+                                    </ng-container>
+                                    <ng-container>
+                                        <div class="form-group col-md mb-0">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col"><small>Sr.No</small></th>
+                                                        <th scope="col"><small>Sub Election Name</small></th>
+                                                        <th scope="col"><small>Manage</small></th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let add of addnewArray;let SubElectionId = index">
+                                                        <td>{{ SubElectionId + 1 }}</td>
+                                                        <td>{{ add.ElectionName }}</td>
+                                                        <td>
+                                                            <button mat-icon-button matTooltip="Click to Delete"
+                                                                class="iconbutton" style="color: rgb(210, 25, 25)">
+                                                                <small><mat-icon aria-label="Delete"
+                                                                        (click)="OnDelete(SubElectionId)">delete</mat-icon></small>
+
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </form>
+                        </ng-container>
+                        <section>
+                            <div style="margin-top: 20px; margin-left: 60px" class="example-button-row">
+                                <button mat-raised-button color="warn" (click)="clearDivDistForm()" type="reset">
+                                    Clear
+                                </button>
+                                <button style="margin-left: 7px" mat-raised-button type="submit" color="primary">
+                                    {{ editFlag?'update':'Create Election' }}
+                                </button>
+                            </div>
+                        </section>
+                        <br /><br />
+                    </form>
+                </mat-card>
+            </div>
+        </div>
+        <!------------------------------------------------------------------------Table-------------------------------------------------------------------------->
+        <div class="col-sm-9">
+            <div class="card-header pb-0">
+                <div class="form-container">
+                    <form [formGroup]="filterForm">
+                        <div class="row align-items-center">
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <mat-form-field appearance="legacy" class="w-100">
+                                        <mat-label>Election Type</mat-label>
+                                        <mat-select formControlName="electiontype">
+                                            <mat-option>Election Type</mat-option>
+                                            <mat-option *ngFor="let election of electionType" [value]="election.Id">
+                                                {{ election.ElectionType }}</mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="f['electiontype'].hasError('required')"> Please select
+                                            Election Type</mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="">
+                                    <mat-form-field appearance="legacy" class="w-100">
+                                        <mat-label>Election/Sub-Election Name</mat-label>
+                                        <input matInput formControlName="searchtext" placeholder="Search">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <button mat-raised-button type="button" (click)="displayData()">
+                                    <mat-icon>search</mat-icon>Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="card card-body left-form-container">
+                <div class="form-group col-md mb-0">
+                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+                        <!------------------ Sr.No.--------------------->
+                        <ng-container matColumnDef="srNo">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Sr.No.</b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{ element.SrNo }}</td>
+                        </ng-container>
+                        <!------------------ Election Name--------------------->
+                        <ng-container matColumnDef="electionname">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Election Name</b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.ElectionName }}
+                            </td>
+                        </ng-container>
+
+                        <!----------------------- Type ------------------------>
+                        <ng-container matColumnDef="type">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Type</b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.ElectionType }}
+                            </td>
+                        </ng-container>
+
+                        <!---------------------- Constituency ------------------>
+                        <ng-container matColumnDef="constituency">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Constituency </b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                {{ element.Constituency }}
+                            </td>
+                        </ng-container>
+
+                        <!--------------------- Sub-Election --------------------->
+                        <ng-container matColumnDef="subelection">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Sub-Election</b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{ element.SubElection }}</td>
+                        </ng-container>
+                        <!---------------------Manage Election--------------------->
+                        <ng-container matColumnDef="manageelection">
+                            <th mat-header-cell *matHeaderCellDef>
+                                <h4><b>Manage Election</b></h4>
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                                <button mat-icon-button matTooltip="Click to Edit" (click)="onEdit(element)"
+                                    class="iconbutton" style="color: rgb(25, 37, 210)">
+                                    <mat-icon aria-label="Edit">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element.Id)"
+                                    class="iconbutton" style="color: rgb(210, 25, 25)">
+                                    <mat-icon aria-label="Delete">delete</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                    <ng-container *ngIf="dataSource?.length!=0">
+                        <mat-paginator [pageIndex]="10" [pageSizeOptions]="[10]" [length]="totalCount"
+                            [pageIndex]="currentPage" (page)="pageChanged($event)" showFirstLastButtons
+                            aria-label="Select page of periodic elements">
+                        </mat-paginator>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

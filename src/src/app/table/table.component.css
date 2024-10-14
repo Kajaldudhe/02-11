@@ -1,0 +1,11 @@
+table{
+    width: 100%;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.highlightedRow{
+    background-color: rgb(245, 154, 142);
+}

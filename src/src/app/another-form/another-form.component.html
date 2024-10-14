@@ -1,0 +1,144 @@
+<div class="row container-fluid mt-3">
+    <div class="col-md-9">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+            <ng-container matColumnDef="srNo">
+                <th mat-header-cell *matHeaderCellDef>Sr.No.</th>
+                <td mat-cell *matCellDef="let element">{{element.srNo}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="govtBody">
+                <th mat-header-cell *matHeaderCellDef>Govt Body</th>
+                <td mat-cell *matCellDef="let element">{{element.govtBodyId == "1" ? "Central Govt" : "State Govt"}}
+                </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="ministry">
+                <th mat-header-cell *matHeaderCellDef>Ministry</th>
+                <td mat-cell *matCellDef="let element">{{element.ministryName}}</td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="state">
+                <th mat-header-cell *matHeaderCellDef>State</th>
+                <td mat-cell *matCellDef="let element">{{element.stateName}}</td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="zone">
+                <th mat-header-cell *matHeaderCellDef>Zone/Region</th>
+                <td mat-cell *matCellDef="let element">{{element.zoneName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="division">
+                <th mat-header-cell *matHeaderCellDef>District/Division</th>
+                <td mat-cell *matCellDef="let element">{{element.divisionName}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>action</th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-icon-button matTooltip="Click to Edit" (click)="onEdit(element)" class="iconbutton"
+                        style="color: rgb(25, 37, 210)">
+                        <mat-icon aria-label="Edit">edit</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Click to Delete" (click)="onDelete(element)" class="iconbutton"
+                        style="color: rgb(210, 25, 25)">
+                        <mat-icon aria-label="Delete">delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="{'highlightedRow':highlightedRow == row.divisionId}"></tr>
+        </table>
+    </div>
+    <!----------------------------------------------------- input Form ------------------------------------------------->
+    <div class="col-md-3">
+        <mat-card [class.mat-elevation-z8]>
+            <form [formGroup]="distDivManagementForm" (ngSubmit)="onSubmit()">
+
+                <!-- country (India static) -->
+                <ng-container>
+                    <mat-form-field appearance="outline">
+                        <mat-label>select Country</mat-label>
+                        <mat-select formControlName="countryId" (selectionChange)="clearForm($event)">
+                            <mat-option value="0">Select Country</mat-option>
+                            <mat-option *ngFor="let countries of countryArray" [value]="countries.countryId">
+                                {{countries.countryName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <!-- Govt Body (static) -->
+                <ng-container>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Govt Body</mat-label>
+                        <mat-select formControlName="govtBodyId"
+                            (selectionChange)="clearForm($event);displayMinistry()">
+                            <mat-option value="0">Select Govt Body</mat-option>
+                            <mat-option *ngFor="let govtBodies of govtBodyArray" [value]="govtBodies.id">
+                                {{govtBodies.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <!-- State -->
+                <ng-container *ngIf="distDivManagementForm.value.govtBodyId == '2' ">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select State</mat-label>
+                        <mat-select formControlName="stateId" (selectionChange)="clearForm($event)">
+                            <mat-option value="0">Select State</mat-option>
+                            <mat-option *ngFor="let states of stateArray" [value]="states.stateId">{{states.stateName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <!-- Ministry -->
+                <ng-container>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Ministry</mat-label>
+                        <mat-select formControlName="ministryId" (selectionChange)="clearForm($event);displayZone()">
+                            <mat-option value="0">Select Ministry</mat-option>
+                            <mat-option *ngFor="let ministries of ministryArray" [value]="ministries.id">
+                                {{ministries.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <!-- zone/region -->
+                <ng-container>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Select Zone/Region</mat-label>
+                        <mat-select formControlName="zoneId" (selectionChange)="clearForm($event)">
+                            <mat-option value="0">Select Zone/Region</mat-option>
+                            <mat-option *ngFor="let zones of zoneArray" [value]="zones.id">{{zones.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
+
+                <!-- sub-zone/division -->
+                <ng-container>
+                    <mat-form-field class="example-full-width" appearance="outline">
+                        <mat-label>Sub-Zone/Sub-Region/Division/District</mat-label>
+                        <input matInput placeholder="Sub-Zone/Sub-Region/Division/District"
+                            formControlName="divisionName" />
+                    </mat-form-field>
+                </ng-container>
+
+                <section>
+                    <div style="margin-top: 20px; margin-left: 60px" class="example-button-row">
+                        <button mat-raised-button color="warn" (click)="clearDivDistForm()">Clear</button>
+                        <button style="margin-left: 7px;" mat-raised-button type="submit"
+                            color="primary">{{buttonValue}}</button>
+                    </div>
+                </section>
+                <br /><br />
+            </form>
+        </mat-card>
+    </div>
+</div>

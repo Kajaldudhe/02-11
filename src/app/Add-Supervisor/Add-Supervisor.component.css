@@ -1,0 +1,36 @@
+table{
+  width: 100%;
+}
+
+mat-form-field{
+  width: 100%;
+}
+
+.highlightedRow{
+  background-color: #fff;
+  border-radius: 5px;
+  animation: blinkingBackground 3s infinite;
+}
+@keyframes blinkingBackground{
+  0%		{ background-color: #b4dbb6;}
+  /* 25%		{ background-color: #8093b1;}
+  50%		{ background-color: #a87a7d;}
+  75%		{ background-color: #a5c0e6;}
+  100%    { background-color: #dac1da;} */
+}
+.example-loading-shade {
+position: absolute;
+top: 0;
+left: 0;
+bottom: 56px;
+right: 0;
+background: rgba(0, 0, 0, 0.15);
+z-index: 1;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
+
+

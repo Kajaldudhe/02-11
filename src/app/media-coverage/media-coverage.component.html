@@ -1,0 +1,60 @@
+<div class="card-height">
+  <div class="row" style="margin-left: 2rem;margin-top: 2rem;">
+        <div class="col-sm-4">
+          <div class="card form-card">
+            <div class="card-header mb-3">
+              <p class="mb-0"> Media Coverage</p>
+            </div>
+            <form [formGroup]="frmMediacoverage" (ngSubmit)="onSubmitMediacoverage()" autocomplete="off">
+              <div class="card-body">
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Article Title</mat-label>
+                    <input matInput formControlName="article_Title" maxlength="50">
+                    <mat-error *ngIf="f['article_Title'].errors">
+                      <span class="text-danger" *ngIf="f['article_Title'].errors?.['required']">
+                        Article_Title is required</span>
+                      <span class="text-danger" *ngIf="f['article_Title'].errors?.['pattern']">Please enter
+                        valid article title name</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Source</mat-label>
+                    <input matInput formControlName="source" maxlength="50">
+                    <mat-error *ngIf="f['source'].errors">
+                      <span class="text-danger" *ngIf="f['source'].errors?.['required']">
+                        Source is required</span>
+                      <span class="text-danger" *ngIf="f['source'].errors?.['pattern']">Please enter
+                        valid source name</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mb-3">
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Url</mat-label>
+                    <input matInput formControlName="url" maxlength="50">
+                    <mat-error *ngIf="f['url'].errors">
+                      <span class="text-danger" *ngIf="f['url'].errors?.['required']">
+                        Url is required</span>
+                      <span class="text-danger" *ngIf="f['url'].errors?.['pattern']">Please enter
+                        valid url name</span>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="text-end">
+                  <button mat-stroked-button class="btn-main-outline" type="button" (click)="onCancle()">Cancel</button>
+                  <button mat-stroked-button class="btn-main ms-2" type="submit">{{isEdit ? 'Update':'Submit'}}</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+        <!-- <div class="col-sm-8">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          </table>
+          </div> -->
+       </div>

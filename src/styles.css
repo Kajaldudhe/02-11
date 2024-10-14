@@ -1,0 +1,326 @@
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import './assets/css/MaterialStyleSheet.css';
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif !important;
+    background-color: #eee;
+}
+
+:root {
+    --main-color: rgb(184, 48, 88);
+    --main-dark-color: rgb(132, 22, 55);
+    --main-light-color: rgb(255, 218, 229);
+}
+
+.bg-main {
+    background-color: var(--main-color);
+    color: #fff;
+    font-family: "Poppins", sans-serif !important;
+}
+
+.bg-main-light {
+    background-color: var(--main-light-color);
+    font-family: "Poppins", sans-serif !important;
+}
+
+.bg-main-dark {
+    background-color: var(--main-dark-color);
+    font-family: "Poppins", sans-serif !important;
+}
+
+.text-main {
+    color: var(--main-color);
+}
+.btn-main {
+    background-color: transparent;
+    color: var(--main-color);
+    border: solid 1px var(--main-color) !important;
+    font-family: "Poppins", sans-serif !important;
+}
+
+.btn-main:hover {
+    background-color: var(--main-color);
+    color: #fff;
+}
+.btn-main-outline {
+    font-size: 0.85rem;
+    color: #808080;
+    border: solid 1px #808080 !important;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif !important;
+}
+
+.btn-main-outline:hover {
+    background-color: #808080;
+    border: solid 1px #808080 !important;
+    color: #fff;
+}
+
+.material-symbols-outlined {
+    font-size: 1.2rem !important;
+    line-height: inherit !important;
+}
+
+.scrollbar {
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    overscroll-behavior: contain;
+    scrollbar-color: #989ea6 transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+}
+
+.scrollbar:hover::-webkit-scrollbar,
+.scrollbar:hover::-webkit-scrollbar-thumb,
+.scrollbar:hover:focus::-webkit-scrollbar,
+.scrollbar:hover:focus::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.scrollbar::-webkit-scrollbar {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    height: 0.375rem;
+    visibility: hidden;
+    width: 0.375rem;
+}
+
+.scrollbar::-webkit-scrollbar-button,
+.scrollbar::-webkit-scrollbar-corner {
+    display: none;
+}
+
+.scrollbar::-webkit-scrollbar-button,
+.scrollbar::-webkit-scrollbar-corner {
+    display: none;
+}
+
+.scrollbar:hover::-webkit-scrollbar,
+.scrollbar:hover::-webkit-scrollbar-thumb,
+.scrollbar:hover:focus::-webkit-scrollbar,
+.scrollbar:hover:focus::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+    background-color: hsla(214, 7%, 62%, .4);
+    border-radius: 3px;
+    visibility: hidden;
+}
+
+.form-card {
+    border: solid 1px var(--main-color);
+}
+
+.plain-card .card-header,
+.form-card .card-header {
+    background-color: transparent;
+    font-size: 0.85rem;
+    color: var(--main-color);
+    font-weight: 500;
+    border-bottom: none;
+}
+
+.btn-main,
+.dashboard-table {
+    font-family: "Poppins", sans-serif !important;
+}
+.about-text{
+    font-size: 0.95rem;
+    line-height:1.8rem;
+    text-align: justify;
+}
+.dm-detail{
+    position: relative;
+    width:250px;
+    margin:0 auto;
+}
+.dm-detail img{
+    width:250px;
+}
+.dm-detail .dm-info{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    left: 0px;
+    background-color: rgba(184, 48, 89, 0.768);
+    width: 252px;
+    overflow: hidden;
+    color: #fff;
+    padding: 10px;
+}
+h5.page-heading
+{
+    padding: 10px 15px ;
+    border-left: 10px solid #F5A837;
+    margin-bottom: 1rem;
+}
+.dashboard-table {
+    border: solid 1px rgba(0, 0, 0, .12);
+}
+.dashboard-table th.mat-header-cell,
+.dashboard-table td.mat-cell{
+    padding-inline: 10px;
+}
+
+.dashboard-table th {
+    background-color: #F2F2F2;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+.dashboard-table .srno {
+    width: 80px;
+}
+.dashboard-table .action {
+    width: 120px;
+}
+.dashboard-table .checkbox {
+    width: 40px;
+}
+
+.dashboard-table a {
+    color: var(--main-color);
+    text-decoration: none;
+}
+
+.dashboard-table a:hover {
+    color: var(--main-dark-color);
+}
+
+.dashboard-table tr.mat-row,
+.dashboard-table tr.mat-header-row {
+    height: 40px;
+}
+
+.form-control:active,
+.form-control:focus,
+.form-control {
+    box-shadow: none;
+    font-size: 0.85rem;
+}
+
+.image-container {
+    width: 160px;
+    position: relative;
+}
+
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+    font-size: 0.85rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.grievance-image {
+    width: 158px;
+    height: 158px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: middle;
+}
+
+.grievance-buttons {
+    position: absolute;
+    bottom: -2px;
+    right: 18px;
+}
+
+.grievance-buttons .btn {
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    line-height: 16px;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 0;
+}
+
+.mat-error {
+    display: block;
+    line-height: 1.8rem !important;
+    font-size: 0.7rem !important;
+}
+
+.highlightedRow {
+    background: #eeeeee !important;
+}
+.mat-simple-snack-bar-content{
+  font-family: "Poppins", sans-serif !important;
+  font-size: 0.85rem;
+}
+.snack-warning {
+    background: #fff !important;
+    color: black !important;
+    border-left: 5px solid #ffc107 !important;
+    border-radius: 0 !important;
+}
+
+.snack-danger {
+    background: #fff !important;
+    color: black !important;
+    border-left: 5px solid #ff4141 !important;
+    border-radius: 0 !important;
+}
+
+.snack-success {
+    background: #fff !important;
+    color: black !important;
+    border-left: 5px solid #198754 !important;
+    border-radius: 0 !important;
+}
+
+#captcha {
+    background-image: url('assets/images/captcha_bg.jpg');
+    border-radius: 0.375rem;
+}
+/* input.mat-input-element:-internal-autofill-selected,
+input.mat-input-element:autofill,
+input.mat-input-element:-webkit-autofill,
+input:-internal-autofill-selected,
+input:autofill,
+input:-webkit-autofill{
+    background-color: none !important;
+    background-image: none !important;
+} */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #000 !important;
+}
+.form-container .form-label {
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+.form-container .form-data {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.mat-paginator-page-size{
+    display: none !important;
+}
+.card-height{
+    height: 80vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x:hidden !important;
+}
+.btn-edit:hover{
+    color: var(--main-color);
+}
