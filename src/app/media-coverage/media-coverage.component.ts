@@ -45,10 +45,11 @@ export class MediaCoverageComponent implements OnInit {
     this.service.setHttp('get','media/GetAllByPagination?pageno='+this.pageNo+'&pagesize='+this.pageSize,false,false,false,'baseURL');
     this.service.getHttp().subscribe({
       next: (res: any) =>{
-
+        if(res.statusCode === '200'){
           this.dataSource .res.responseData1;
           this.totalPages = res.responseData.responseData2.pageCount;
       }
+    }
     })
   }
 

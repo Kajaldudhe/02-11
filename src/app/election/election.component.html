@@ -46,19 +46,18 @@
                             </ng-container>
                         </ng-container><br><br>
                         <ng-container>
-                            <mat-label style="font-family:sans-serif;color: black;"><strong>Is Sub-Election
-                                    Applicable?</strong></mat-label><br>
+                            <mat-label style="font-family:sans-serif;color: black;"><strong>Is Sub-Election Applicable?</strong></mat-label><br>
                             <mat-radio-group aria-label="Select an option" formControlName="IsSubElectionApplicable">
                                 <mat-radio-button *ngFor="let isSub of isSubElectionArray" [value]="isSub.id"
                                     class="form-data" value="1"
                                     style="margin-top: 1rem; padding-left:0rem;padding-right:1rem;">{{isSub.name}}</mat-radio-button>
                             </mat-radio-group>
-                            <ng-container *ngIf="electionForm.value.IsSubElectionApplicable">
+                            <!-- <ng-container *ngIf="electionForm.value.IsSubElectionApplicable">
                                 <mat-error
                                     *ngIf="electionForm.controls['IsSubElectionApplicable'].hasError('required')">
                                     Please Select Field.
                                 </mat-error>
-                            </ng-container>
+                            </ng-container> -->
                         </ng-container>
                         <ng-container *ngIf="electionForm.value.IsSubElectionApplicable == 0 ? true :false">
                             <form [formGroup]="addForm">

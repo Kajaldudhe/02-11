@@ -101,12 +101,8 @@ export class ElectionComponent implements OnInit {
   // ------------------------------------------------------ display Table ---------------------------------------------------------- //
 
   displayData() {
-    let electionType = this.filterForm.controls['electiontype'].value
-      ? this.filterForm.controls['electiontype'].value
-      : 0;
-    let searchValue = this.filterForm.controls['searchtext'].value
-      ? this.filterForm.controls['searchtext'].value
-      : '';
+    let electionType = this.filterForm.controls['electiontype'].value? this.filterForm.controls['electiontype'].value: 0;
+    let searchValue = this.filterForm.controls['searchtext'].value ? this.filterForm.controls['searchtext'].value: '';
     console.log(electionType);
     this.service.setHttp('get','Service.asmx/Web_GetElectionMaster?&ElectionTypeId=' + electionType +'&UserId=1&Search='+ searchValue +'&nopage=' + (this.currentPage + 1) , false,false,false,'baseURL');
     this.service.getHttp().subscribe({
