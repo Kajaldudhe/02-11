@@ -18,8 +18,8 @@ constructor(private http: HttpClient, private router: Router) { }
   // production settings
   getBaseurl(url: string) {
     switch (url) {
-      // case 'baseURL': return 'http://demoeelection.erpguru.in/';
-      case 'baseURL': return 'whizhack_cms/';
+      case 'baseURL': return 'http://demoeelection.erpguru.in/';
+      // case 'baseURL': return 'whizhack_cms/';
       // case 'baseURL': return 'https://hrmssvr.erpguru.in/'; // for deployment
         break;
       default:
@@ -48,7 +48,7 @@ constructor(private http: HttpClient, private router: Router) { }
     baseUrl: any
   ) {
     try {
-      //this.userObj = JSON.parse(sessionStorage.loggedInDetails);
+      //this.userObj = JSON.parse(sessionStorage.loggedInDetails); 
     } catch (e) {}
     this.clearHttp();
     this.httpObj.type = type;
